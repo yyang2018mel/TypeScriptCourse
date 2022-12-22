@@ -1,9 +1,22 @@
 
-class SeatAssignment {
-    // Index signature property
-    [seatNumber: string]: string;
+class Ride {
+    private static _activeRides: number = 0;
+
+    static get activeRides() {
+        return Ride._activeRides;
+    }
+
+    start() { Ride._activeRides++; }
+    stop() { Ride._activeRides--; }
 }
 
-let seats = new SeatAssignment();
-seats.A1 = 'Michael';
-seats.A2 = 'Yifan';
+// compilation error
+// Ride.activeRides = 1;
+
+let ride1 = new Ride();
+ride1.start();
+console.log(Ride.activeRides);
+
+let ride2 = new Ride();
+ride2.start();
+console.log(Ride.activeRides);
