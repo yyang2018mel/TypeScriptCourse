@@ -1,11 +1,24 @@
 
-class ArrayUtils 
+interface Result<T>
 {
-    static wrapInArray<T>(value: T) 
-    {
-        return [value];
-    }
+    data: T | null,
+    error: string | null
 }
 
-let stringArr = ArrayUtils.wrapInArray('1');
-let numberArr = ArrayUtils.wrapInArray(1);
+function fetch<T>(url: string) : Result<T>
+{
+    return {data: null, error: null};
+}
+
+interface User 
+{
+    usrname: string;
+}
+
+interface Product
+{
+    title: string;
+}
+
+let result = fetch<User>('url');
+let result2 = fetch<Product>('url');
