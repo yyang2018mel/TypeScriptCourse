@@ -1,9 +1,11 @@
 
-class KeyValuePair<K, V>
+class ArrayUtils 
 {
-    constructor(public key: K, public value: V) 
-    { }
+    static wrapInArray<T>(value: T) 
+    {
+        return [value];
+    }
 }
 
-let pair = new KeyValuePair<string, string>('1', 'a');
-let infer = new KeyValuePair('1', 'a');
+let stringArr = ArrayUtils.wrapInArray('1');
+let numberArr = ArrayUtils.wrapInArray(1);
