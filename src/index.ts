@@ -1,48 +1,9 @@
-class Logger
+
+class KeyValuePair<K, V>
 {
-    private _fileName: string;
-
-    constructor(fileName: string) 
-    {
-        this._fileName = fileName;
-    }
-
-    Log() : void
-    {
-        console.log('Logging to ' + this._fileName);
-    }
+    constructor(public key: K, public value: V) 
+    { }
 }
 
-class Person
-{
-    constructor(public firstName: string, public lastName: string) 
-    {
-    }
-
-    get fullName()
-    {
-        return this.firstName + ' ' + this.lastName;
-    }
-}
-
-class Employee extends Person
-{
-    constructor(firstName: string, lastName: string, public salary: number) 
-    {
-        super(firstName, lastName);    
-    }
-}
-
-type Address = 
-{
-    street: string,
-    city: string,
-    zipCode: number
-};
-
-interface IEmployee
-{
-    name: string,
-    salary: number,
-    address: Address
-};
+let pair = new KeyValuePair<string, string>('1', 'a');
+let infer = new KeyValuePair('1', 'a');
