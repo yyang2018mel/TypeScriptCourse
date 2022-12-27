@@ -1,31 +1,25 @@
 
-interface Product 
+function echo<T>(arg: T) 
 {
-    name: string;
-    price: number;
+    return arg;
 }
 
-type ReadOnly<T> = 
+function printName<T extends { name: string }> (obj: T)
 {
-    // Index signature
-    // keyof
-    readonly [Property in keyof T]: T[Property]
+    console.log(obj.name);
 }
 
-type Optional<T> = 
+class Entity<TId>
 {
-    [Property in keyof T]?: T[Property]
+    constructor(public Id: TId) 
+    {    
+    }
 }
 
-type Nullable<T> = 
+interface User
 {
-    [Property in keyof T]: T[Property] | null
+    userId: number,
+    username: string;
 }
 
-let product: ReadOnly<Product> = 
-{
-    name: 'a',
-    price: 1
-};
-
-product.name = 'a';
+let keys: keyof User = 'userId'
