@@ -1,24 +1,43 @@
 
-interface Result<T>
+interface Product 
 {
-    data: T | null,
-    error: string | null
+    name: string;
+    price: number;
 }
 
-function fetch<T>(url: string) : Result<T>
+class Store<T> 
 {
-    return {data: null, error: null};
+    protected _objects: T[] = [];
+
+    add(obj: T): void
+    {
+        this._objects.push(obj);
+    }
 }
 
-interface User 
+// Pass on the generic type parameter
+class CompressibleStore<T> extends Store<T>
 {
-    usrname: string;
+    compress() : void
+    {
+
+    }
 }
 
-interface Product
+// Restricting the generic type parameter
+class SearchableStore<T extends { name: string }> extends Store<T>
 {
-    title: string;
+    find(name: string) : T | undefined
+    {
+        return this._objects.find(o => o.name === name);
+    }
 }
 
-let result = fetch<User>('url');
-let result2 = fetch<Product>('url');
+// Fix the generic type parameter
+class ProductStore extends Store<Product>
+{
+    filterByCategory(category: string) : Product[]
+    {
+        return [];
+    }
+}
