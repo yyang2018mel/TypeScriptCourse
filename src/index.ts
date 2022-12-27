@@ -1,25 +1,14 @@
 
-function echo<T>(arg: T) 
+function Component(constructor: Function) 
 {
-    return arg;
-}
-
-function printName<T extends { name: string }> (obj: T)
-{
-    console.log(obj.name);
-}
-
-class Entity<TId>
-{
-    constructor(public Id: TId) 
-    {    
+    console.log('Component decorator called');
+    constructor.prototype.uniqueId = Date.now();
+    constructor.prototype.insertInDOM = () => {
+        console.log('Inserting the component in the DOM');
     }
 }
 
-interface User
+@Component
+class ProfileComponent
 {
-    userId: number,
-    username: string;
 }
-
-let keys: keyof User = 'userId'
