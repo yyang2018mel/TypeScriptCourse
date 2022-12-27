@@ -5,50 +5,27 @@ interface Product
     price: number;
 }
 
-class Store<T> 
+type ReadOnly<T> = 
 {
-    protected _objects: T[] = [];
-
-    add(obj: T): void
-    {
-        this._objects.push(obj);
-    }
-
-    find(property: keyof T, value: unknown) : T | undefined
-    {
-        return this._objects.find(o => o[property] === value);
-    }
+    // Index signature
+    // keyof
+    readonly [Property in keyof T]: T[Property]
 }
 
-let store = new Store<Product>();
-store.add({ name: 'a', price: 1 });
-store.find('name', 'a');
-store.find('price', 1);
-store.find('nonExistingProperty', 1);
-
-// Pass on the generic type parameter
-class CompressibleStore<T> extends Store<T>
+type Optional<T> = 
 {
-    compress() : void
-    {
-
-    }
+    [Property in keyof T]?: T[Property]
 }
 
-// Restricting the generic type parameter
-class SearchableStore<T extends { name: string }> extends Store<T>
+type Nullable<T> = 
 {
-    find(name: string) : T | undefined
-    {
-        return this._objects.find(o => o.name === name);
-    }
+    [Property in keyof T]: T[Property] | null
 }
 
-// Fix the generic type parameter
-class ProductStore extends Store<Product>
+let product: ReadOnly<Product> = 
 {
-    filterByCategory(_category: string) : Product[]
-    {
-        return [];
-    }
-}
+    name: 'a',
+    price: 1
+};
+
+product.name = 'a';
